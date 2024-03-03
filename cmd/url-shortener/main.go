@@ -18,6 +18,11 @@ func main() {
 	log.Info("starting url-shortner", slog.String("env", cfg.Env))
 	log.Debug("debug messages are enabled")
 
+	//storage, err := sqlite.New(cfg.StoragePath)
+	//if err != nil {
+	//	log.Error("failed to init storage")
+	//	os.Exit(1)
+	//}
 }
 
 func setupLogger(env string) *slog.Logger {

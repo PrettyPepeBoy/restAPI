@@ -21,7 +21,6 @@ type HTTPServer struct {
 }
 
 func MustLoad() *Config {
-	_ = os.Setenv("CONFIG_PATH", "C:\\Users\\Андрей\\GolandProjects\\URLShortener\\config\\local.yaml")
 	configPath := os.Getenv("CONFIG_PATH") //путь выстраиваем по переменной окружения
 	fmt.Println(configPath)
 	if configPath == "" {
