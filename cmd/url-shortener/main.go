@@ -4,6 +4,9 @@ import (
 	"URLShortener/internal/config"
 	"URLShortener/internal/lib/logger/sl"
 	"URLShortener/internal/storage/sqlite"
+	"fmt"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"log/slog"
 	"os"
 )
@@ -25,7 +28,18 @@ func main() {
 		log.Error("failed to init storage", sl.Err(err))
 		os.Exit(1)
 	}
-	_ = storage
+
+	urlFound, err := storage.GetURL("google")
+	if err != nil {
+		log.Error("failed to find url", sl.Err(err))
+		os.Exit(1)
+	}
+	fmt.Println(urlFound)
+
+	router := chi.NewRouter()
+
+	router.Use(middleware.RequestID)
+	router.Use(middleware.Logger)
 }
 
 func setupLogger(env string) *slog.Logger {
